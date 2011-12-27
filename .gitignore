@@ -1,2 +1,5 @@
 app/cache/*
 app/logs/*
+.buildpath
+.project
+.settings
