@@ -60,3 +60,28 @@
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1
+
+
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+    
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[Pagerfanta]
+    git=http://github.com/whiteoctober/Pagerfanta.git
+    target=/pagerfanta
+
+[WhiteOctoberPagerfantaBundle]
+    git=http://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git
+    target=/bundles/WhiteOctober/PagerfantaBundle
+
+[SonataIntlBundle]
+    git=http://github.com/sonata-project/SonataIntlBundle.git
+    target=/bundles/Sonata/IntlBundle
+
+[GravatarBundle]
+    git=http://github.com/ornicar/GravatarBundle.git
+    target=/bundles/Ornicar/GravatarBundle
