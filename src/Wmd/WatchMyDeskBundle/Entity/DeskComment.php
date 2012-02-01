@@ -42,6 +42,12 @@ class DeskComment
      */
     private $createdAt;
 
+    /**
+	* @ORM\ManyToOne(targetEntity="Desk", inversedBy="comments", cascade={"remove"})
+	* @ORM\JoinColumn(name="desk_id", referencedColumnName="id")
+	*/
+	protected $desk;
+    
     
 	public function __construct()
     {
@@ -116,5 +122,25 @@ class DeskComment
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set desk
+     *
+     * @param Wmd\WatchMyDeskBundle\Entity\Desk $desk
+     */
+    public function setDesk(\Wmd\WatchMyDeskBundle\Entity\Desk $desk)
+    {
+        $this->desk = $desk;
+    }
+
+    /**
+     * Get desk
+     *
+     * @return Wmd\WatchMyDeskBundle\Entity\Desk 
+     */
+    public function getDesk()
+    {
+        return $this->desk;
     }
 }

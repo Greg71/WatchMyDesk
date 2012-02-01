@@ -76,13 +76,19 @@ class Desk
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled;
+    
+    /**
+	* @ORM\OneToMany(targetEntity="DeskComment", mappedBy="desk", cascade={"remove", "persist"})
+	*/
+	protected $comments;
 
 
 	public function __construct()
 	{
-	    $this->voteCount = 0;
-	    $this->createdAt = new \DateTime('now');
-	    $this->isEnabled = false;
+	    $this->voteCount 	= 0;
+	    $this->createdAt 	= new \DateTime('now');
+	    $this->isEnabled 	= false;
+	    $this->comments 	= new \Doctrine\Common\Collections\ArrayCollection();
 	}
     
     /**
@@ -254,4 +260,34 @@ class Desk
     {
         return $this->isEnabled;
     }
+
+    /**
+     * Add comments
+     *
+     * @param Wmd\WatchMyDeskBundle\Entity\DeskComment $comments
+     */
+    public function addDeskComment(\Wmd\WatchMyDeskBundle\Entity\DeskComment $comments)
+    {
+        $this->comments[] = $comments;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+    
+	/**
+	 * Set comments
+	 *
+	 * @param \Doctrine\Common\Collections\Collection $comments
+	 */
+	public function setDeskComment(\Doctrine\Common\Collections\Collection $comments)
+	{
+		$this->comments = $comments;
+	}
 }

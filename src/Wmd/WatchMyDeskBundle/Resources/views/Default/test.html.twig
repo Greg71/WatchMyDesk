@@ -1,0 +1,21 @@
+<h1>{{ desk.title }}</h1>
+
+<p>
+	{{ desk.description }}
+</p>
+
+<h3>Commentaires</h3>
+
+<ul>
+	{% for com in desk.comments %}
+		<li>
+			<h4>Commentaire du {{ com.createdAt|date('d/m/Y') }}</h4>
+			
+			<p>
+				{{ com.description }}
+			</p>
+		</li>
+	{% else %}
+		<li>Aucun commentaire</li>
+	{% endfor %}
+</ul>
