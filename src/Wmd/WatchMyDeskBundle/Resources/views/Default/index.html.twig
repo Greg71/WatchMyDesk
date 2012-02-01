@@ -1,1 +1,11 @@
-Bienvenue sur Watch My Desk !
+{% extends '::base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+    - Bienvenue !
+{% endblock %}
+
+{% block body %}
+    <p>Hello les fermiers !</p>
+    <a href="{{ path('homepage') }}">Accueil</a> - <a href="{{ path('desk_show', {"desk_id": 5}) }}">Bureau n°5</a>
+{% endblock %}

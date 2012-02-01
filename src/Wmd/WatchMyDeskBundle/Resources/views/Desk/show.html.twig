@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+    - Détail du bureau {{ id }}
+{% endblock %}
+
+{% block body %}
+    <h1>Détail du bureau n°{{ id }}</h1>
+    <p>
+        Description du bureau ...
+    </p>
+    <a href="{{ path("homepage") }}">Retour à l'accueil</a>
+{% endblock %}
