@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Wmd\WatchMyDeskBundle\Entity\Desk
  *
  * @ORM\Table(name="desk")
- * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Entity\DeskRepository")
+ * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Repository\DeskRepository")
  */
 class Desk
 {

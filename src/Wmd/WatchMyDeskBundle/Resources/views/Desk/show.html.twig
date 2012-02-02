@@ -2,13 +2,16 @@
 
 {% block title %}
     {{ parent() }}
-    - Détail du bureau {{ id }}
+    - {{ desk.title }}
 {% endblock %}
 
 {% block body %}
-    <h1>Détail du bureau n°{{ id }}</h1>
+    <h1>{{ desk.title }}</h1>
     <p>
-        Description du bureau ...
+        {{ desk.description }}
+    </p>
+    <p>
+        Bureau proposé le {{ desk.createdAt|date('d/m/Y') }}
     </p>
     <a href="{{ path("homepage") }}">Retour à l'accueil</a>
 {% endblock %}

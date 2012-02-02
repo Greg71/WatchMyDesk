@@ -1,6 +1,6 @@
 <?php
 
-namespace Wmd\WatchMyDeskBundle\Entity;
+namespace Wmd\WatchMyDeskBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

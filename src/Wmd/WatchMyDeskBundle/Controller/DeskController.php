@@ -18,6 +18,11 @@ class DeskController extends Controller
      */
     public function showAction($desk_id)
     {
-        return array('id' => $desk_id);
+	    if (!$desk = $this->get('wmd.desk_manager')->loadDesk($desk_id))
+	    {
+	        throw new NotFoundHttpException($this->get('translator')->trans('This desk does not exist.'));
+	    }
+	    
+	    return array('desk' => $desk);
     }
 }

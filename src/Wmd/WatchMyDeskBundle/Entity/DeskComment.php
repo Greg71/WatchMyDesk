@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Wmd\WatchMyDeskBundle\Entity\DeskComment
  *
  * @ORM\Table(name="desk_comment")
- * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Entity\DeskCommentRepository")
+ * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Repository\DeskCommentRepository")
  */
 class DeskComment
 {
