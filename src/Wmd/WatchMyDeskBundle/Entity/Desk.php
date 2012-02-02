@@ -3,12 +3,18 @@
 namespace Wmd\WatchMyDeskBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * Wmd\WatchMyDeskBundle\Entity\Desk
  *
  * @ORM\Table(name="desk")
  * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Repository\DeskRepository")
+ * 
+ * @UniqueEntity(fields="title", message="Ce titre de bureau existe déjà...")
+ * @Assert\Callback(methods={"isContentCorrect"})
  */
 class Desk
 {
@@ -24,7 +30,14 @@ class Desk
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * 
+     * @Assert\NotBlank(message="Title must not be empty")
+     * @Assert\MinLength(
+     *      limit=3,
+     *      message="Title should have at least {{ limit }} characters."
+     * )
+     * @Assert\MaxLength(255)
      */
     private $title;
 
@@ -32,6 +45,8 @@ class Desk
      * @var text $summary
      *
      * @ORM\Column(name="summary", type="text")
+     * 
+     * @Assert\NotBlank()
      */
     private $summary;
 
@@ -39,6 +54,8 @@ class Desk
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
+     * 
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -46,6 +63,9 @@ class Desk
      * @var decimal $note
      *
      * @ORM\Column(name="note", type="decimal", nullable=true)
+     * 
+     * @Assert\Min(limit = "0", message = "Desk's note must be positive")
+     * @Assert\Max(limit = "5", message = "The max value for the note is 5")
      */
     private $note;
 
@@ -60,6 +80,8 @@ class Desk
      * @var datetime $createdAt
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * 
+     * @Assert\DateTime()
      */
     private $createdAt;
 
@@ -67,6 +89,8 @@ class Desk
      * @var datetime $updatedAt
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * 
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
@@ -289,5 +313,25 @@ class Desk
 	public function setDeskComment(\Doctrine\Common\Collections\Collection $comments)
 	{
 		$this->comments = $comments;
+	}
+	
+	public function isContentCorrect(ExecutionContext $context)
+	{
+	    $badWords = "#poule|poulette|cocotte#i"; // FDW FTW
+	
+	    // Nous testons si nos propriétés contiennent ces mots reservés
+	    if (preg_match($badWords, $this->getTitle()))
+	    {
+	        $propertyPath = $context->getPropertyPath() . '.title';
+	        $context->setPropertyPath($propertyPath);
+	        $context->addViolation('Vous utilisez un mot réservé dans le titre !', array(), null); // On renvoi l'erreur au contexte
+	    }
+	    
+	    if (preg_match($badWords, $this->getDescription()))
+	    {
+	        $propertyPath = $context->getPropertyPath() . '.description';
+	        $context->setPropertyPath($propertyPath);
+	        $context->addViolation('Vous utilisez un mot réservé dans la description !', array(), null);
+	    }
 	}
 }
