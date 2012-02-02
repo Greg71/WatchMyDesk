@@ -20,7 +20,12 @@ class DeskController extends Controller
     /**
      * @Route("/show/{desk_id}", name="desk_show")
      * @Template()
-     */
+     *
+	 * @author Gregory SEVES
+	 * @since  2 févr. 2012
+	 * @param  int $desk_id
+	 * @return array
+	 */
     public function showAction($desk_id)
     {
 	    if (!$desk = $this->get('wmd.desk_manager')->loadDesk($desk_id))
