@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block title %}{% if desk.id %}{{ 'Edit desk'|trans }}{% else %}{{ 'Add desk'|trans }}{% endif %}{% endblock %}
+
+{% block body %}
+<form action="{% if desk.id %}{{ path('desk_edit', {'deskId':desk.id}) }}{% else %}{{ path('desk_add') }}{% endif %}" method="post" {{ form_enctype(form) }} novalidate="novalidate">
+    <h1>{% if desk.id %}{{ 'Edit desk'|trans }}{% else %}{{ 'Add desk'|trans }}{% endif %}</h1>
+    <div>
+    {{ form_errors(form.title) }}
+    {{ form_label(form.title, 'Title'|trans) }}
+    {{ form_widget(form.title) }}
+    </div>
+    <div>
+    {{ form_errors(form.summary) }}
+    {{ form_label(form.summary, 'Summary'|trans) }}
+    {{ form_widget(form.summary) }}
+    </div>
+    <div>
+    {{ form_errors(form.description) }}
+    {{ form_label(form.description, 'Description'|trans) }}
+    {{ form_widget(form.description) }}
+    </div>
+    
+    {{ form_rest(form) }}
+    <input type="submit" id="submit" value="{% if desk.id %}{{ 'Update'|trans }}{% else %}{{ 'Add'|trans }}{% endif %}" name="submit" />
+</form>
+
+{% endblock %}
