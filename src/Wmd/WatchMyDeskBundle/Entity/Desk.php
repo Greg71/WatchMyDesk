@@ -12,9 +12,12 @@ use Symfony\Component\Validator\ExecutionContext;
  *
  * @ORM\Table(name="desk")
  * @ORM\Entity(repositoryClass="Wmd\WatchMyDeskBundle\Repository\DeskRepository")
+ * @ORM\HasLifecycleCallbacks()
  * 
  * @UniqueEntity(fields="title", message="Ce titre de bureau existe déjà...")
  * @Assert\Callback(methods={"isContentCorrect"})
+ * 
+ * 
  */
 class Desk
 {
@@ -334,4 +337,12 @@ class Desk
 	        $context->addViolation('Vous utilisez un mot réservé dans la description !', array(), null);
 	    }
 	}
+	
+	/**
+	 * @ORM\prePersist
+	 */
+//	public function testHook()
+//	{
+//	    echo "test"; die;
+//	}
 }
