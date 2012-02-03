@@ -15,7 +15,17 @@ abstract class BaseManager
 	
     protected function persistAndFlush($entity)
     {
-        $this->em->persist($entity);
-        $this->em->flush();
+        $this->persist($entity);
+        $this->flush();
+    }
+    
+    protected function persist($entity)
+    {
+    	$this->em->persist($entity);
+    }
+    
+    protected function flush()
+    {
+    	$this->em->flush();
     }
 }
