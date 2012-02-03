@@ -2,19 +2,11 @@
 
 namespace Wmd\WatchMyDeskBundle\Manager;
 
-use Doctrine\ORM\EntityManager;
 use Wmd\WatchMyDeskBundle\Manager\BaseManager;
 use Wmd\WatchMyDeskBundle\Entity\Desk;
 
 class DeskManager extends BaseManager
-{
-    protected $em;
-
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-    
+{    
 	public function getRepository()
     {
         return $this->em->getRepository('WmdWatchMyDeskBundle:Desk');
